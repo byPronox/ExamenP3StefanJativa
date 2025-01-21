@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using BuscadorPaisesApp.Models;
-using BuscadorPaisesApp.Services;
 using System.Net.Http;
 using System.Text.Json;
-using System.Threading.Tasks;
 using ExamenP3StefanJativa.Models;
-
+using ExamenP3StefanJativa.Services;
 
 namespace ExamenP3StefanJativa.ViewModels
 {
@@ -43,22 +39,22 @@ namespace ExamenP3StefanJativa.ViewModels
             try
             {
                 var httpClient = new HttpClient();
-                var url = $"https://freetestapi.com/api/v1/movies?search={NombrePelicula}?fields=title,genre,actors,awards,website";
+                var url = $"https://www.freetestapi.com/api/v1/movies?search={TituloPelicula}";
 
                 var response = await httpClient.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonResponse = await response.Content.ReadAsStringAsync();
-                    var peliculas = JsonSerializer.Deserialize<JsonElement>(jsonResponse);
+                    var peliculas = JsonSerializer.Deserialize<List<JsonElement>>(jsonResponse);
 
-                    if (peliculas.ValueKind == JsonValueKind.Array && peliculas.GetArrayLength() > 0)
+                    if (peliculas != null && peliculas.Count > 0)
                     {
                         var pelicula = peliculas[0];
 
                         var tituloPelicula = pelicula.GetProperty("title").GetString();
-                        var genero = pelicula.GetProperty("genre").GetString();
-                        var actorPrincipal = pelicula.GetProperty("actors").GetProperty("...").GetString();
+                        var genero = string.Join(", ", pelicula.GetProperty("genre").EnumerateArray().Select(g => g.GetString()));
+                        var actorPrincipal = string.Join(", ", pelicula.GetProperty("actors").EnumerateArray().Select(a => a.GetString()));
                         var awards = pelicula.GetProperty("awards").GetString();
                         var webside = pelicula.GetProperty("website").GetString();
 
@@ -90,8 +86,6 @@ namespace ExamenP3StefanJativa.ViewModels
                 ResultadoBusqueda = $"Error: {ex.Message}. Verifica tu conexión a internet.";
             }
         }
-
-
 
         [RelayCommand]
         public void LimpiarCampos()

@@ -3,13 +3,20 @@
     x:Class="ExamenP3StefanJativa.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:ExamenP3StefanJativa"
-    Shell.FlyoutBehavior="Disabled"
+    xmlns:local="clr-namespace:ExamenP3StefanJativa.Views"
+  
     Title="ExamenP3StefanJativa">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        
+        <ShellContent Title="Buscador" 
+                      
+                      ContentTemplate="{DataTemplate local:MainPage}" />
+
+        
+        <ShellContent Title="Listado" 
+                      
+                      ContentTemplate="{DataTemplate local:LecturaPage}" />
+    </TabBar>
 
 </Shell>

@@ -20,13 +20,14 @@ namespace ExamenP3StefanJativa.ViewModels
         public LecturaViewModel()
         {
             _databaseService = App.Database;
-            CargarPeliculas();
+            Peliculas = new ObservableCollection<Pelicula>();
+            _ = CargarPeliculasAsync();
         }
 
-        public async Task CargarPeliculas()
+        private async Task CargarPeliculasAsync()
         {
-            var listaPeliculas = await _databaseService.ObtenerPelicualsAsync();
-            Peliculas = new ObservableCollection<Pelicula>();
+            var listaPeliculas = await _databaseService.ObtenerPeliculasAsync();
+            Peliculas.Clear();
 
             foreach (var pelicula in listaPeliculas)
             {
@@ -44,7 +45,7 @@ namespace ExamenP3StefanJativa.ViewModels
 
         public async Task ActualizarPeliculas()
         {
-            await CargarPeliculas();
+            await CargarPeliculasAsync();
         }
     }
 }
