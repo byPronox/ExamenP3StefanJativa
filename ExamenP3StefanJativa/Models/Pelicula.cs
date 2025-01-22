@@ -11,6 +11,7 @@ namespace ExamenP3StefanJativa.Models
         public string ActorPrincal { get; set; }
         public string Awards { get; set; }
         public string Webside { get; set; }
+        public string Usuario { get; set; } = "SJativa";
         public string Descripcion { get; set; }
     }
 }

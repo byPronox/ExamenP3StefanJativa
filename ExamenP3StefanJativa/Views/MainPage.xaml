@@ -3,27 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:ExamenP3StefanJativa.ViewModels"
              x:Class="ExamenP3StefanJativa.Views.MainPage"
-             Title="Buscador de Peliculas">
+             Title="Buscador de Películas"
+             BackgroundColor="#f0f0f0">
 
     <ContentPage.BindingContext>
         <vm:BuscadorViewModel />
     </ContentPage.BindingContext>
 
-    <VerticalStackLayout Padding="20">
+    <VerticalStackLayout Padding="20" Spacing="15">
+        <Label Text="Buscador de Películas"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,10,0,20"/>
         <Entry x:Name="sjativa_txtNombrePais"
                Text="{Binding TituloPelicula}"
-               Placeholder="Ingresa el nombre de la película" />
-
+               Placeholder="Ingresa el nombre de la película"
+               FontSize="18"
+               BackgroundColor="White"
+               TextColor="Black"
+               PlaceholderColor="#888888"
+               Margin="0,0,0,10"/>
         <Button x:Name="sjativa_btnBuscar"
                 Text="Buscar"
-                Command="{Binding BuscarPeliculaCommand}" />
-
+                Command="{Binding BuscarPeliculaCommand}"
+                BackgroundColor="#007ACC"
+                TextColor="White"
+                FontSize="18"
+                CornerRadius="10"
+                Margin="0,0,0,10"/>
         <Button x:Name="sjativa_btnLimpiar"
                 Text="Limpiar"
-                Command="{Binding LimpiarCamposCommand}" />
-
-        <Label x:Name="sjativa_lblResultado"
-               Text="{Binding ResultadoBusqueda}"/>
+                Command="{Binding LimpiarCamposCommand}"
+                BackgroundColor="#FF6347"
+                TextColor="White"
+                FontSize="18"
+                CornerRadius="10"
+                Margin="0,0,0,10"/>
+        <ScrollView>
+            <Label x:Name="sjativa_lblResultado"
+                   Text="{Binding ResultadoBusqueda}"
+                   FontSize="16"
+                   TextColor="#333333"
+                   Margin="0,10,0,0"/>
+        </ScrollView>
     </VerticalStackLayout>
 
 </ContentPage>

@@ -1,10 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using ExamenP3StefanJativa.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ExamenP3StefanJativa.Services;
 
@@ -38,7 +34,8 @@ namespace ExamenP3StefanJativa.ViewModels
                     ActorPrincal = pelicula.ActorPrincal,
                     Awards = pelicula.Awards,
                     Webside = pelicula.Webside,
-                    Descripcion = $"Titulo: {pelicula.TituloPelicula}, Genero: {pelicula.Genero}, Actor Principal: {pelicula.ActorPrincal}, Awards: {pelicula.Awards}, Webside: {pelicula.Webside}"
+                    Usuario = pelicula.Usuario,
+                    Descripcion = $"Titulo: {pelicula.TituloPelicula}, Genero: {pelicula.Genero}, Actor Principal: {pelicula.ActorPrincal}, Awards: {pelicula.Awards}, Webside: {pelicula.Webside}, Usuario: {pelicula.Usuario}"
                 });
             }
         }

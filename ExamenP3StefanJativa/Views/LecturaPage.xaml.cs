@@ -9,12 +9,9 @@ public partial class LecturaPage : ContentPage
     public LecturaPage()
     {
         InitializeComponent();
-
-        
         _viewModel = new LecturaViewModel();
         BindingContext = _viewModel;
     }
-
 
     protected override async void OnAppearing()
     {

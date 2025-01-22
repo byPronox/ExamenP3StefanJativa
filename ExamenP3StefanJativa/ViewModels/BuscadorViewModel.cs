@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Text.Json;
+using System.Net.Http;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Net.Http;
-using System.Text.Json;
 using ExamenP3StefanJativa.Models;
 using ExamenP3StefanJativa.Services;
 
@@ -54,7 +53,7 @@ namespace ExamenP3StefanJativa.ViewModels
 
                         var tituloPelicula = pelicula.GetProperty("title").GetString();
                         var genero = string.Join(", ", pelicula.GetProperty("genre").EnumerateArray().Select(g => g.GetString()));
-                        var actorPrincipal = string.Join(", ", pelicula.GetProperty("actors").EnumerateArray().Select(a => a.GetString()));
+                        var actorPrincipal = pelicula.GetProperty("actors").EnumerateArray().FirstOrDefault().GetString();
                         var awards = pelicula.GetProperty("awards").GetString();
                         var webside = pelicula.GetProperty("website").GetString();
 
@@ -64,12 +63,13 @@ namespace ExamenP3StefanJativa.ViewModels
                             Genero = genero,
                             ActorPrincal = actorPrincipal,
                             Awards = awards,
-                            Webside = webside
+                            Webside = webside,
+                            Usuario = "SJativa"
                         };
 
                         await _databaseService.InsertarPeliculaAsync(nuevaPelicula);
 
-                        ResultadoBusqueda = $"Pelicula: {nuevaPelicula.TituloPelicula}\nGenero: {nuevaPelicula.Genero}\nActor Principal: {nuevaPelicula.ActorPrincal}\nAwards: {nuevaPelicula.Awards}\nWebside: {nuevaPelicula.Webside}";
+                        ResultadoBusqueda = $"Pelicula: {nuevaPelicula.TituloPelicula}\nGenero: {nuevaPelicula.Genero}\nActor Principal: {nuevaPelicula.ActorPrincal}\nAwards: {nuevaPelicula.Awards}\nWebside: {nuevaPelicula.Webside}\nUsuario: {nuevaPelicula.Usuario}";
                     }
                     else
                     {
